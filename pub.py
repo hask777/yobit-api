@@ -3,19 +3,19 @@ import json
 
 def get_info():
     response = requests.get(url="https://yobit.net/api/3/info")
-    with open('info.txt', 'w') as f:
+    with open('files/info.txt', 'w') as f:
         f.write(response.text)
     return response.text
 
 def get_ticker(coin1="btc", coin2="usd"):
     response = requests.get(url=f"https://yobit.net/api/3/ticker/{coin1}_{coin2}?ignore_invalid=1")
-    with open('ticker.txt', 'w') as f:
+    with open('files/ticker.txt', 'w') as f:
         f.write(response.text)
     return response.text
 
 def get_depth(coin1="btc", coin2="usd", limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/depth/{coin1}_{coin2}?limit={limit}&ignore_invalid=1")
-    with open('depth.txt', 'w') as f:
+    with open('files/depth.txt', 'w') as f:
         f.write(response.text)
 
     bids = response.json()[f"{coin1}_usd"]["bids"]
@@ -29,7 +29,7 @@ def get_depth(coin1="btc", coin2="usd", limit=150):
 def trades(coin1="btc", coin2="usd", limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/trades/{coin1}_{coin2}?limit={limit}&ignore_invalid=1")
 
-    with open('trades.txt', 'w') as f:
+    with open('files/trades.txt', 'w') as f:
         f.write(response.text)
 
     total_trade_ask = 0
